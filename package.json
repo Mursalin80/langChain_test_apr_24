@@ -1,0 +1,32 @@
+{
+  "name": "langchain_test_apr_24",
+  "version": "1.0.0",
+  "description": "LangChain",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "langchain",
+    "openAI"
+  ],
+  "author": "Mursalin",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/vertexai": "^1.1.0",
+    "@huggingface/inference": "^2.6.7",
+    "@langchain/community": "^0.0.56",
+    "@langchain/google-genai": "^0.0.12",
+    "@langchain/openai": "^0.0.28",
+    "@pinecone-database/pinecone": "^2.2.1",
+    "@supabase/supabase-js": "^2.43.1",
+    "dotenv": "^16.4.5",
+    "langchain": "^0.1.36"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
