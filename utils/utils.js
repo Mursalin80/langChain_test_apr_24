@@ -40,3 +40,6 @@ export const text_spliter = (file) =>
   recursiveCharacterTextSplitter.createDocuments([file]);
 export const split_text_content = () =>
   split_text.map((doc) => doc.pageContent);
+
+export const combineDoucment = (doc) =>
+  doc.map((doc) => doc.pageContent).join("\n\n");
