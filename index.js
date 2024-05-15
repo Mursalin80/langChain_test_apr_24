@@ -1,34 +1,28 @@
-import { ChatPromptTemplate } from "@langchain/core/prompts";
-import { SupabaseVectorStore } from "@langchain/community/vectorstores/supabase";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
 import { text_spliter, readFile } from "./utils/utils.js";
 import { google_LLM as g_model } from "./llms/llm_models.js";
-import { hf_embeddings } from "./utils/hf_embedding.js";
-import { createSupabaseClient } from "./utils/supabase.js";
-
-const outputParser = new StringOutputParser();
+import { stQ_propmt } from "./utils/promptTemp.js";
+import { retriever } from "./utils/retriever.js";
 
 // text spliter
 let file_data = await readFile("./data.txt");
 let split_text = await text_spliter(file_data);
-// pinecone
 
-// Prompt templete
-let temp = `There you ask a quection:{question}`;
-let promptTemp = ChatPromptTemplate.fromTemplate(temp);
-// standalone question prompt
-let standaloneQuestion = `The given a question, convert it to standalone question question:{question} standalone question:`;
-let st_qu_propmt = ChatPromptTemplate.fromTemplate(standaloneQuestion);
+// let tempChain = promptTemp.pipe(g_model).pipe(retriver);
+let stQ_chain = stQ_propmt
+  .pipe(g_model)
+  .pipe(new StringOutputParser())
+  .pipe(retriever);
+let response = await stQ_chain.invoke({
+  question:
+    "where stars twinkle like distant dreams and galaxies spiral in an eternal dance.",
+});
 
-// let tempChain = promptTemp.pipe(g_model);
-// let st_qu_chain = st_qu_propmt.pipe(g_model);
+// let ret_res = await retriver.invoke(" where stars twinkle like distant ");
 
-// let st_response = await st_qu_chain.invoke({
-//   question:
-//     "i am lover of imran khan and following all news about imran khan,please provide the brife information about imran khan pakistan",
-// });
-
+// console.log({ ret_res });
+// console.log({ st_qu_chain });
 // let response = await tempChain.invoke({
 //   question:
 //     "i am lover of imran khan and following all news about imran khan,please provide the brife information about imran khan pakistan",

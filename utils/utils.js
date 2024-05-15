@@ -5,9 +5,9 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 // text spliter
 export const recursiveCharacterTextSplitter =
   new RecursiveCharacterTextSplitter({
-    chunkSize: 40,
+    chunkSize: 500,
     separators: ["\n\n", "\n", " ", ""], // dedault setting
-    chunkOverlap: 4,
+    chunkOverlap: 50,
   });
 
 // fs read file
